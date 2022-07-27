@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             val user=User(userId,userName,password)
             db.userDao().deleteUser(user)
         }
-
+        userIdTv.text.clear()
         userTextView.text.clear()
         passwordTextView.text.clear()
     }
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             val user=User(userId,userName,password)
             db.userDao().updateUser(user)
         }
-
+        userIdTv.text.clear()
         userTextView.text.clear()
         passwordTextView.text.clear()
     }
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             val user=User(userId,userName,password)
             db.userDao().addUser(user)
         }
-
+        userIdTv.text.clear()
         userTextView.text.clear()
         passwordTextView.text.clear()
     }
