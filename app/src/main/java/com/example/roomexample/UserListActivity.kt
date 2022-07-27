@@ -22,7 +22,7 @@ class UserListActivity : AppCompatActivity() {
             val list=db.userDao().viewAll()
             var string=""
             for(i in list.indices){
-                string+=list[i].uname+"\t\t\t"+list[i].password+"\n"
+                string+=list[i].id.toString()+"\t\t\t"+list[i].uname+"\t\t\t"+list[i].password+"\n"
             }
             val textView=findViewById<TextView>(R.id.result_label)
             textView.text=string

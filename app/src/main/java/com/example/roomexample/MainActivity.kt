@@ -28,16 +28,62 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val updateBtn=findViewById<Button>(R.id.update_btn)
+        updateBtn.setOnClickListener {
+            updateData()
+        }
+
+        val deleteBtn=findViewById<Button>(R.id.delete_btn)
+        deleteBtn.setOnClickListener {
+            deleteData()
+        }
+
     }
 
-    private fun saveData() {
+    private fun deleteData() {
+        val userIdTv=findViewById<EditText>(R.id.userid_input)
         val userTextView=findViewById<EditText>(R.id.username_input)
         val passwordTextView=findViewById<EditText>(R.id.pwd_input)
 
         val userName:String=userTextView.text.toString()
         val password=passwordTextView.text.toString()
+        val userId=userIdTv.text.toString().toInt()
         GlobalScope.launch(Dispatchers.IO) {
-            val user=User(0,userName,password)
+            val user=User(userId,userName,password)
+            db.userDao().deleteUser(user)
+        }
+
+        userTextView.text.clear()
+        passwordTextView.text.clear()
+    }
+
+    private fun updateData() {
+        val userIdTv=findViewById<EditText>(R.id.userid_input)
+        val userTextView=findViewById<EditText>(R.id.username_input)
+        val passwordTextView=findViewById<EditText>(R.id.pwd_input)
+
+        val userId=userIdTv.text.toString().toInt()
+        val userName:String=userTextView.text.toString()
+        val password=passwordTextView.text.toString()
+        GlobalScope.launch(Dispatchers.IO) {
+            val user=User(userId,userName,password)
+            db.userDao().updateUser(user)
+        }
+
+        userTextView.text.clear()
+        passwordTextView.text.clear()
+    }
+
+    private fun saveData() {
+        val userIdTv=findViewById<EditText>(R.id.userid_input)
+        val userTextView=findViewById<EditText>(R.id.username_input)
+        val passwordTextView=findViewById<EditText>(R.id.pwd_input)
+
+        val userId=userIdTv.text.toString().toInt()
+        val userName:String=userTextView.text.toString()
+        val password=passwordTextView.text.toString()
+        GlobalScope.launch(Dispatchers.IO) {
+            val user=User(userId,userName,password)
             db.userDao().addUser(user)
         }
 

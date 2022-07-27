@@ -1,8 +1,6 @@
 package com.example.roomexample
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface UserDAO {
@@ -11,4 +9,10 @@ interface UserDAO {
 
     @Query("SELECT * FROM USER")
     fun viewAll():List<User>
+
+    @Update
+    fun updateUser(user: User)
+
+    @Delete
+    fun deleteUser(user: User)
 }
